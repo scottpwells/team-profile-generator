@@ -70,7 +70,7 @@ const ManagerQuestions = [
     {
         type: "input",
         name: "managerEmail",
-        message: "What is your Email",
+        message: "What is your Email?",
         validate: answer => {
             const email = answer.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
             if(email) {
@@ -83,6 +83,13 @@ const ManagerQuestions = [
         type: "input",
         name: "officeNumber",
         message: "What is your office number?",
+        validate: answer => { 
+            const pass = answer.match(/^[1-9]\d*$/)
+            if(pass) {
+                return true;
+            }
+            return "Please enter a valid number"
+         }
     }
 ]
 
@@ -91,16 +98,36 @@ const ManagerQuestions = [
             type: "input",
             name: "engineerName",
             message: "What is your name?",
+            validate: answer => {
+                if(answer !== "") {
+                    return true;
+                } 
+                return "Please enter your name"
+            }
         },
         {
             type: "input",
             name: "engineerID",
             message: "What is your ID?",
+            validate: answer => { 
+                const pass = answer.match(/^[1-9]\d*$/)
+                if(pass) {
+                    return true;
+                }
+                return "Please enter a valid number"
+             }
         },
         {
             type: "input",
             name: "engineerEmail",
-            message: "What is your Email",
+            message: "What is your Email?",
+            validate: answer => {
+                const email = answer.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+                if(email) {
+                    return true;
+                }   
+                return "please enter a valid email"
+            }
 
         },
         {
@@ -115,16 +142,37 @@ const InternQuestions = [
         type: "input",
         name: "internName",
         message: "What is your name?",
+        validate: answer => {
+            if(answer !== "") {
+                return true;
+            } 
+            return "Please enter your name"
+        }
     },
     {
         type: "input",
         name: "internID",
         message: "What is your ID?",
+        validate: answer => { 
+            const pass = answer.match(/^[1-9]\d*$/)
+            if(pass) {
+                return true;
+            }
+            return "Please enter a valid number"
+         }
     },
     {
         type: "input",
         name: "internEmail",
-        message: "What is your Email",
+        message: "What is your Email?",
+        validate: answer => {
+            const email = answer.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+            if(email) {
+                return true;
+            }   
+            return "please enter a valid email"
+
+        }
     },
     {
         type: "input",
