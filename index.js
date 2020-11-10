@@ -10,11 +10,162 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const ManagerQuestions = 
+var teamMembers = [];
+
+function switchStatement() {
+    inquirer.prompt([{
+        type: "list",
+        name: "switch",
+        message: "Would you like to add an employee?",
+        choices: ["Manager", "Engineer", "Intern", "Done"]
+    }]).then(response => {
+        switch(response.switch) {
+            case "Manager":
+             askManager();
+              break;
+            case "Engineer":
+                askEngineer();
+              break;
+            case "Intern":
+            askIntern();
+            default:
+             buildTeam()
+          }
+    })
+}
+
+function buildTeam() {
+    if(!fs.existsSync(OUTPUT_DIR)) {
+
+        fs.mkdirSync(OUTPUT_DIR)
+    }
+    fs.writeFileSync(outputPath, render(teamMembers), "utf-8" )
+
+}
+
+const ManagerQuestions = [
+    {
+        type: "input",
+        name: "managerName",
+        message: "What is your name?",
+        validate: answer => {
+            if(answer !== "") {
+                return true;
+            } 
+            return "Please enter your name"
+        }
+    },
+    {
+        type: "input",
+        name: "managerID",
+        message: "What is your ID?",
+        validate: answer => { 
+            const pass = answer.match(/^[1-9]\d*$/)
+            if(pass) {
+                return true;
+            }
+            return "Please enter a valid number"
+         }
+    },
+    {
+        type: "input",
+        name: "managerEmail",
+        message: "What is your Email",
+        validate: answer => {
+            const email = answer.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+            if(email) {
+                return true;
+            }   
+            return "please enter a valid email"
+        }
+    },
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "What is your office number?",
+    }
+]
+
+    const EngineerQuestions = [
+        {
+            type: "input",
+            name: "engineerName",
+            message: "What is your name?",
+        },
+        {
+            type: "input",
+            name: "engineerID",
+            message: "What is your ID?",
+        },
+        {
+            type: "input",
+            name: "engineerEmail",
+            message: "What is your Email",
+
+        },
+        {
+            type: "input",
+            name: "Github",
+            message: "What is your Github username?",
+        }
+    ]
+    
+const InternQuestions = [
+    {
+        type: "input",
+        name: "internName",
+        message: "What is your name?",
+    },
+    {
+        type: "input",
+        name: "internID",
+        message: "What is your ID?",
+    },
+    {
+        type: "input",
+        name: "internEmail",
+        message: "What is your Email",
+    },
+    {
+        type: "input",
+        name: "schoolName",
+        message: "What school did you attend?",
+    },
 
 
-array of questions for Manager and engineer Intern
-matching the Constructor
+]
+
+function askManager() {
+inquirer.prompt(ManagerQuestions)
+.then(response => {
+    const manager = new Manager(response.managerName, response.managerID, response.managerEmail, response.officeNumber)
+    teamMembers.push(manager);
+    switchStatement()
+})
+
+}
+function askEngineer() {
+    inquirer.prompt(EngineerQuestions)
+    .then(response => {
+        const engineer = new Engineer(response.engineerName, response.engineerID, response.engineerEmail, response.Github)
+        teamMembers.push(engineer);
+        switchStatement()
+    })
+}
+    function askIntern() {
+        inquirer.prompt(InternQuestions)
+        .then(response => {
+            const intern = new Intern(response.internName, response.internID, response.internEmail, response.schoolName)
+            teamMembers.push(intern);
+            switchStatement()
+        })
+    
+    }
+
+askManager();
+
+// array of questions for Engineer and engineer Intern
+// matching the Constructor
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
