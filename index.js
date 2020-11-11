@@ -70,7 +70,7 @@ const ManagerQuestions = [
     {
         type: "input",
         name: "managerEmail",
-        message: "What is your Email?",
+        message: "What is your email?",
         validate: answer => {
             const email = answer.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
             if(email) {
@@ -177,7 +177,7 @@ const InternQuestions = [
     {
         type: "input",
         name: "schoolName",
-        message: "What school did you attend?",
+        message: "What school do you attend?",
     },
 
 
