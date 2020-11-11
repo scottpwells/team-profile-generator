@@ -13,6 +13,8 @@
 
 ![team-profile-generator](https://user-images.githubusercontent.com/57837212/98756313-500d9280-2398-11eb-8584-f4fd936cd38b.PNG)
 
+[demo-video](https://drive.google.com/file/d/1ukIoIaXoPWEs9qyV6kivUT7JPXunQdng/view?usp=sharing)
+
 
   ## Description
   Team Profile Generator is a cli application that allows a engineering leader of a team to build out a html page with
